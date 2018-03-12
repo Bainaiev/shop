@@ -1,0 +1,51 @@
+{% extends "shop/nav.html" %}
+
+{% load static %}
+
+{% block title %}<title>Login</title>{% endblock %}
+
+{% block main %}
+  <section class="login-block">
+      <div class="login-header">
+  		   <h2>Login</h2>
+      </div>
+      <form action="/shop/login/" method="POST">
+      	  {% csrf_token %}
+      	  <div class="login-wrapper">
+              <div class="email-login">
+              	   <label for="{{ form.username.id_for_label }}">Email: </label>
+              	   {{ form.username }}
+              </div>
+              <div class="errors">
+              	   {{form.username.errors}}
+              </div>
+              <div class="password">
+              	   <label for="{{ form.password.id_for_label }}">Password: </label>
+              	   {{ form.password }}
+              </div>
+              <div>
+                  <a href="/shop/password_reset/">Forgot your password?</a>
+              </div>
+               <div class="errors">
+              	   {{form.password.errors}}
+              </div>
+              <div class="errors">
+                   {{ form.non_field_errors }}
+              </div>
+              <div class="social-links">
+                  <a href="{% url 'social:begin' 'github' %}" class="github"></a>
+                  <a href="{% url 'social:begin' 'google-oauth2' %}" class="google"></a>
+                  <!-- <a href="{% url 'social:begin' 'facebook' %}" class="facebook"></a>
+                  <a href="{% url 'social:begin' 'github' %}" class="twitter"></a> -->
+              </div>
+              
+              
+              <div class="submit">
+              	   <button type="submit">Login</button>
+              </div>
+              
+              
+          </div>
+      </form>
+  </section>
+{% endblock %}

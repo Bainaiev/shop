@@ -1,0 +1,89 @@
+{% extends "shop/nav.html" %}
+
+{% load static %}
+
+{% block title %}<title>Home</title>{% endblock %}
+
+{% block main %}
+		<main>
+            <section class="top-section">
+                <h1>Welcome to Mostra!</h1>
+                <h3>Quality Products - Great Prices!</h3>
+                <a href="/shop/clothing" alt="Check It Out">Check It Out!</a>
+            </section>
+            <section class="search-section">
+                <div class="left-form">
+                    <form action="{{url}}" method="GET">
+                        {% if sex == 'All Categories' %}
+							<input type="submit" name="sex" value="All Categories" class="current">
+							{% else %}
+                            <input type="submit" name="sex" value="All Categories">
+							{% endif %}
+							{% if sex == 'Man' %}
+							<input type="submit" name="sex" value="Man" class="current">
+							{% else %}
+                            <input type="submit" name="sex" value="Man">
+							{% endif %}
+							
+							{% if sex == 'Woman' %}
+							<input type="submit" name="sex" value="Woman" class="current">
+							{% else %}
+                            <input type="submit" name="sex" value="Woman">
+						{% endif %}
+                </form>
+                </div>
+                <div class="right-form">
+                    <form action="{{url}}" method="GET">
+                        <input type="submit" name="search" value="Search">
+                        <input type="text" name="products" placeholder="Browse Products">
+                </form>
+                </div>
+            </section>
+            <section class="items">
+            	{% for product in products %}
+                <div class="product-wrapper">
+                    <a href="/shop/item/{{product.id}}" class="product">
+                        <h3>{{product.title}}</h3>
+                        <div class="product-photo">
+                            <img src="{{ MEDIA_URL }}{{product.image}}" alt="item" />
+                        </div>
+                        <p class="price">Price: <span class="money">US ${{product.price}}</span></p>
+                    </a>
+                </div>
+                {% endfor %}
+            </section>
+
+            {% if products.has_other_pages %}
+            <section class="pagination">
+            	{% if products.has_previous %}
+                <div class="previous">
+                    <a href="?page={{ products.previous_page_number }}">&laquo; Previous</a>
+                </div>
+                {% else %}
+                    <div class="previous disabled"><a>&laquo; Previous</a></div>
+				{% endif %}
+               
+                {% for i in numbers %}
+                    {% if products.number == i %}
+        				<div class="active">
+                            <span>{{ i }}</span>
+                        </div>
+      				{% else %}
+        				<div><a href="?page={{ i }}">{{ i }}</a></div>
+      				{% endif %}
+      			{% endfor %}
+                
+                {% if products.has_next %}
+					<div class="next">
+                        <a href="?page={{ products.next_page_number }}">Next &raquo;</a>
+                    </div>
+                {% else %}
+					<div class="next disabled"><a>Next &raquo;</a></div>
+                {% endif %}
+            </section>
+            {% endif %}
+
+            
+			
+        </main>
+{% endblock %}

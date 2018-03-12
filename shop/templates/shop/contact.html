@@ -1,0 +1,52 @@
+{% extends "shop/nav.html" %}
+
+{% load static %}
+
+{% block title %}<title>Contact Us</title>{% endblock %}
+
+{% block main %}
+
+            <main>
+            	<div class="contact">
+            	<section class="contact-top">
+            		<img src="{% static 'shop/images/bg-top-contact_us.png' %}" alt="image" class="image">
+                    <h1>Contact Us</h1>
+                </section>
+                <section class="contact-content">
+                	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in faucibus lorem. Vestibulum sed mauris odio. Ut suscipit nibh sit amet arcu laoreet feugiat. Proin dui arcu, varius sit amet porta non, eleifend eu massa. Nam sollicitudin, velit ut posuere elementum, velit lectus hendrerit est, quis pellentesque erat neque eu enim. Mauris vitae accumsan magna. </p>
+				    
+                    <form action="/shop/contact/" method="POST">
+				        {% csrf_token %}
+				        {{ form.non_field_errors }}
+				        <div class="form-wrapper">
+				        	
+				            <div class="first_name">
+				            	{{ form.first_name.errors }}
+				            	<label for="{{ form.first_name.id_for_label }}">First Name:</label><br/> 
+				            	{{ form.first_name }}
+				        	</div>
+				        	<div class="last_name">
+				            	{{ form.last_name.errors }}
+				            	<label for="{{ form.last_name.id_for_label }}">Last Name:</label><br/> 
+				            	{{ form.last_name }}
+				        	</div>
+				        	
+				        	<div class="email">
+				            	{{ form.email.errors }}
+				            	<label for="{{ form.email.id_for_label }}">Email:</label>
+				            	{{ form.email }}
+				        	</div>
+				       		<div class="message">
+				            	{{ form.message.errors }}
+				            	<label for="{{ form.message.id_for_label }}">Message:</label>
+				            	{{ form.message }}
+				        	</div>
+				        	<input type="submit" value="Send Message">
+				    	</div>
+				    	
+				    </form>
+                </section>
+                </div>
+			</main>
+			
+{% endblock %}

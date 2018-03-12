@@ -1,0 +1,107 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+{% endblock %}
+{% block link %}
+	<link rel="stylesheet" type="text/css" href="{% static 'shop/css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'shop/css/styles.css' %}">
+{% endblock %}
+{% block header %}
+		<header>
+            <div class="logo">
+                <div>
+                    <a href="/shop/home"><img src="{% static 'shop/images/logo.png' %}" alt="logo"></a>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="logout-block">
+                    <p>Welcome, {{ user.email }}</p>
+                    <a href="/shop/profile">Profile</a>
+                    <a href="/shop/logout">Logout</a>
+                </div>
+                    
+                {% else %}    
+                <div class="authorization-block">
+                    <a href="/shop/login">Login</a>/
+                    <a href="/shop/signup">Sign Up</a>
+                </div>
+                {% endif %}
+            </div>
+            <nav class="nav" id="nav">
+            	{% if nav == "home" %}
+                <a href="/shop/home" title="home" class="current">Home</a>
+                {% else %}
+                <a href="/shop/home" title="home">Home</a>
+                {% endif %}
+                {% if nav == "about" %}
+                <a href="/shop/about" title="about" class="current">About</a>
+                {% else %}
+                <a href="/shop/about" title="about">About</a>
+                {% endif %}
+                {% if nav == "clothing" %}
+                <a href="/shop/clothing" title="clothing" class="current">Clothing</a>
+                {% else %}
+                <a href="/shop/clothing" title="clothing">Clothing</a>
+                {% endif %}
+                {% if nav == "shoes" %}
+                <a href="/shop/shoes" title="shoes" class="current">Shoes</a>
+                {% else %}
+                <a href="/shop/shoes" title="shoes">Shoes</a>
+                {% endif %}
+                {% if nav == "electronics" %}
+                <a href="/shop/electronics" title="electronics" class="current">Electronics</a>
+                {% else %}
+                <a href="/shop/electronics" title="electronics">Electronics</a>
+                {% endif %}
+                {% if nav == "perfumes" %}
+                <a href="/shop/perfumes" title="perfumes" class="current">Perfumes</a>
+                {% else %}
+                <a href="/shop/perfumes" title="perfumes">Perfumes</a>
+                {% endif %}
+                {% if nav == "contact" %}
+                <a href="/shop/contact" title="contact" class="current">Contact Us</a>
+                {% else %}
+                <a href="/shop/contact" title="contact">Contact Us</a>
+                {% endif %}
+                <a href="javascript:void(0);" class="icon" onclick="hideNav()">&#9776;</a>
+            </nav>
+        </header>
+			
+{% endblock %}
+{% block footer %}
+		<footer>
+            <p>Copyright ©2010 Me Mostra. All Rights Reserved. <br> Website Designed and Developed by Dellustrations</p>
+            <div class="mini-pagination">
+            <div>
+                <a href="/shop/home">Home</a><span>|</span>
+            </div>
+
+            <div>
+                <a href="/shop/about">About Amostras</a>
+                <span>|</span>
+            </div>
+            <div>
+                <a href="/shop/clothing">Products</a>
+                <span>|</span>
+            </div>
+            <div>
+                <a href="/shop/contact">Contact Us</a>
+            </div>
+            </div>
+        </footer>
+
+		<script>
+        function hideNav() {
+            var x = document.getElementById("nav");
+            if (x.className === "nav") {
+                x.className += " responsive";
+            } else {
+                x.className = "nav";
+            }
+        }
+        </script>
+
+{% endblock %}

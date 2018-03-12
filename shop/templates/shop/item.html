@@ -1,0 +1,22 @@
+{% extends "shop/nav.html" %}
+
+{% load static %}
+
+{% block title %}<title>Home</title>{% endblock %}
+
+{% block main %}
+			<main>
+				<div class="item-block">
+					<div class="product-photo">
+						<img src="{{ MEDIA_URL }}{{item.image}}">
+				    </div>
+				    <div class="description">
+				        <h3>{{item.title}}</h3>
+				        <p>{{item.description}}</p>
+				        <p class="price">Price: <span class="money">US ${{item.price}}</span></p>
+				        <a href="/shop/add_checkout/{{item.id}}">Buy now!</a>
+                    </div>
+					
+				</div>
+			</main>
+{% endblock %}
